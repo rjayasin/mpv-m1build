@@ -1,0 +1,16 @@
+name: mpv-m1build
+
+on: push
+
+jobs:
+  build_mpv:
+    runs-on: macos-latest
+    steps:
+      - name: brew install mpv
+        run: brew install mpv --build-bottle --bottle-arch=arm64_monterey && which brew && ls
+      - name: clone mpv
+        uses: actions/checkout@v2
+        with:
+          repository: mpv-player/mpv
+      - name: build mpv
+        run: cd mpv && mkdir build/
